@@ -1,7 +1,254 @@
-/*  Styles for the shared components (VisibilityBadge/Menu/Picker, SkeletonCard,
- *  LoadingBar, CookieBanner, Drawer) and the popover/roving-focus chassis.
- *  Consumes tokens from palette.css and tokens.css; defines no tokens itself.
- *
- *  Populated in Phase 1 (chassis) and Phase 3 (components), lifted from
- *  social-frontend/src/index.css and the co-located component CSS files.
+/*  Styles for the shared components (SkeletonCard, LoadingBar, CookieBanner,
+ *  Drawer). Consumes tokens from palette.css and tokens.css; defines no tokens
+ *  itself. The pickers ship their own layout (picker.css / language.css in
+ *  riposte-pickers).
  */
+
+/* ==========================================================================
+   SkeletonCard
+   ========================================================================== */
+
+.skeleton-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-4);
+}
+
+.skeleton-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-overlay);
+  flex-shrink: 0;
+}
+
+.skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex: 1;
+}
+
+.skeleton-line {
+  display: block;
+  height: 0.75rem;
+  background: var(--color-overlay);
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-line-sm { width: 30%; }
+.skeleton-line-md { width: 45%; }
+.skeleton-line-3q { width: 75%; }
+.skeleton-line-full { width: 100%; }
+
+.skeleton-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.skeleton-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-overlay);
+  border-radius: var(--radius-md);
+}
+
+/* Subtle shimmer. Suppressed when the user prefers reduced motion: the
+   placeholder still indicates "loading" via its existence and the surrounding
+   "Loading…" label. */
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton-avatar,
+  .skeleton-line,
+  .skeleton-media {
+    background: linear-gradient(
+      90deg,
+      var(--color-overlay) 0%,
+      var(--color-divider) 50%,
+      var(--color-overlay) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s linear infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ==========================================================================
+   LoadingBar
+
+   Fixed strip at the top of the viewport. `--loading-bar-top` (default 0) lets
+   an app with a fixed header push the bar below it. Fade-in is instant so the
+   bar appears the moment a load starts; fade-out is slower so small request
+   gaps don't strobe it.
+   ========================================================================== */
+
+.loading-bar {
+  position: fixed;
+  top: var(--loading-bar-top, 0);
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--color-primary);
+  z-index: 29;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 200ms ease-out, opacity 300ms ease-out;
+}
+
+.loading-bar.is-visible {
+  opacity: 1;
+  transition: width 200ms ease-out, opacity 0s;
+}
+
+/* ==========================================================================
+   CookieBanner
+   ========================================================================== */
+
+.cookie-banner {
+  position: fixed;
+  bottom: var(--spacing-4);
+  left: var(--spacing-4);
+  right: var(--spacing-4);
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  z-index: 40;
+  box-shadow: var(--shadow-popover);
+}
+
+.cookie-banner p {
+  margin: 0;
+  flex: 1;
+  color: var(--color-muted);
+}
+
+/* Self-contained acknowledge button (a primary button in the design language),
+   so the banner does not depend on the app's global button classes. */
+.cookie-banner-ack {
+  flex: 0 0 auto;
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.5;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.cookie-banner-ack:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   Drawer (headless shell)
+
+   The slide-in panel chrome. The panel stays mounted in both states so the
+   transition runs and the focus-trap ref is stable; `data-open` drives
+   visibility. The host supplies the panel contents (nav, sections, etc.) with
+   its own classes.
+   ========================================================================== */
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.drawer[data-open="true"] {
+  pointer-events: auto;
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.18s ease-out;
+}
+
+.drawer[data-open="true"] .drawer-backdrop {
+  opacity: 1;
+}
+
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 88vw);
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-divider);
+  box-shadow: var(--shadow-popover);
+  transform: translateX(100%);
+  transition: transform 0.22s ease-out;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.drawer[data-open="true"] .drawer-panel {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.drawer-title {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.drawer-close {
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0 var(--spacing-2);
+}
+
+.drawer-close:hover {
+  color: var(--color-text);
+}

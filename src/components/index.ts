@@ -14,7 +14,33 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
  */
 
-// Shared app-agnostic components: VisibilityBadge/Menu/Picker, SkeletonCard,
-// LoadingBar, CookieBanner, the headless Drawer + useFocusTrap. Extracted from
-// social-frontend in Phase 3.
-export {};
+// Shared app-agnostic components. Each user-facing string accepts an optional
+// label prop that overrides the i18n bundle (prop > bundle > built-in default),
+// so a consumer can localize via the ./i18n bundle or inject strings directly.
+
+export { default as SkeletonCard } from "./SkeletonCard";
+export type { SkeletonCardProps } from "./SkeletonCard";
+
+export { default as LoadingBar } from "./LoadingBar";
+export type { LoadingBarProps } from "./LoadingBar";
+
+export { default as CookieBanner } from "./CookieBanner";
+export type { CookieBannerProps } from "./CookieBanner";
+
+export { default as Drawer } from "./Drawer";
+export type { DrawerProps } from "./Drawer";
+
+export { default as useFocusTrap } from "./useFocusTrap";
+export type { FocusTrapOptions } from "./useFocusTrap";
+
+// The loading bucket that <LoadingBar> renders. An app's data layer calls
+// startLoad/endLoad around requests; resetLoadCount clears it (e.g. on route
+// change).
+export {
+  startLoad,
+  endLoad,
+  resetLoadCount,
+  subscribeLoading,
+  getLoadingSnapshot,
+} from "./loadingState";
+export type { LoadingState, LoadOptions } from "./loadingState";

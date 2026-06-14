@@ -1,0 +1,7 @@
+/*  Styles for the shared components (VisibilityBadge/Menu/Picker, SkeletonCard,
+ *  LoadingBar, CookieBanner, Drawer) and the popover/roving-focus chassis.
+ *  Consumes tokens from palette.css and tokens.css; defines no tokens itself.
+ *
+ *  Populated in Phase 1 (chassis) and Phase 3 (components), lifted from
+ *  social-frontend/src/index.css and the co-located component CSS files.
+ */

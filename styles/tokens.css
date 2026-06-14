@@ -1,0 +1,10 @@
+/*  Riposte design tokens: the shared non-color scale.
+ *
+ *  Typography (--font-body, --font-mono, --font-size-*), spacing
+ *  (--spacing-*), radius (--radius-*), and shadow (--shadow-*) tokens, common
+ *  across every colorway. Defined on :root so they apply regardless of the
+ *  active [data-theme].
+ *
+ *  Populated in Phase 1 from the :root token block in
+ *  social-frontend/src/index.css.
+ */

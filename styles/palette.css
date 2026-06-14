@@ -1,0 +1,13 @@
+/*  Riposte design tokens: color palette.
+ *
+ *  One [data-theme="<id>"] block per colorway (light) plus a matching
+ *  [data-theme="<id>-dark"] block. Eight colorways: five aesthetic (forest,
+ *  warm, plum, avernus, mineral) and three WCAG 2.1 accessibility colorways
+ *  (daltonia, tritan, achroma). Only color tokens live here; the shared
+ *  non-color scale lives in tokens.css.
+ *
+ *  The active theme is set as <html data-theme="..."> by ThemeProvider.
+ *
+ *  Populated in Phase 1 from social-frontend/src/index.css (the 16 [data-theme]
+ *  blocks, the canonical 8-theme set).
+ */

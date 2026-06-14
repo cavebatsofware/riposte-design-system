@@ -1,0 +1,8 @@
+# Workspace root for the Rust side of the design system. The npm package lives
+# at this same repo root (package.json, src/ for TypeScript, styles/); the Rust
+# crate is the `crate/` member. This root manifest exists so a git dependency
+# (riposte-social depends on this repo by URL) can discover the
+# `riposte-design-system` package as a workspace member.
+[workspace]
+resolver = "2"
+members = ["crate"]

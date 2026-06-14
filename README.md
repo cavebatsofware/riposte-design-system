@@ -55,6 +55,30 @@ Subpath exports: `.`, `./theme`, `./shared`, `./components`, `./i18n`,
 `./styles` (and `./styles/palette.css`, `./styles/tokens.css`,
 `./styles/components.css` individually).
 
+## Rust crate
+
+The repo is polyglot: alongside the npm package, `crate/` is a Rust crate
+(`riposte-design-system`) that gives a Rust backend the same branded assets from
+one source of truth:
+
+- `email_catalog()`: the localized `email` string catalogs, embedded and parsed
+  once into an `i18n_md_email_templates::Catalog`.
+- `EMAIL_LAYOUT` / `email_layout()`: the shared, inline-safe HTML email shell.
+- `stylesheet()` and the `*_CSS` constants: the same palette / token / component
+  CSS the npm package ships (read from `styles/` via `include_str!`), for serving
+  or server-side rendering.
+
+Consume it as a git dependency (the crate lives in `crate/`, discovered via the
+root workspace manifest):
+
+```toml
+riposte-design-system = { git = "https://github.com/cavebatsofware/riposte-design-system.git" }
+```
+
+```sh
+cargo test   # builds the crate and checks locale parity + asset wiring
+```
+
 ## Develop
 
 ```sh

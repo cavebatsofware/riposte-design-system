@@ -1,0 +1,17 @@
+[package]
+name = "riposte-design-system"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-only"
+authors = ["Grant DeFayette <grant@cavebatsofware.com>"]
+description = "Rust side of the Riposte design system: the canonical localized email catalogs, the branded email layout shell, and accessors for the shared CSS (palette, tokens, components)."
+repository = "https://github.com/cavebatsofware/riposte-design-system"
+
+# This crate references the shared stylesheets at ../../styles via include_str!,
+# so it must be built from within the full design-system repo checkout (the
+# case for path and git dependencies). It is not intended for crates.io
+# publication, where files outside the crate root would be excluded.
+
+[dependencies]
+i18n-md-email-templates = "0.2.0"
+serde_json = "1.0"

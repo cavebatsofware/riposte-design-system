@@ -14,9 +14,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
  */
 
-// Root barrel. Re-exports every subpath once Phase 1+ populates them:
-//   export * from "./theme";
-//   export * from "./shared";
-//   export * from "./components";
-// Empty during the Phase 0 scaffold.
-export {};
+// Root barrel: the full design-system surface. Subpaths (./theme, ./shared,
+// ./components, ./i18n, ./styles) remain available for tree-shakeable imports.
+export * from "./theme";
+export * from "./shared";
+export * from "./components";

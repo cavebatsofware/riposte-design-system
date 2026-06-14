@@ -14,6 +14,11 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
  */
 
-// Shared chassis: PopoverPicker, useRovingFocus. Moved down from
-// riposte-pickers in Phase 1 so pickers and components share one foundation.
-export {};
+// Shared chassis: the accessible toggle/popover/focus shell and the
+// roving-focus keyboard hook. The pickers (riposte-pickers) and the shared
+// components both build on this foundation.
+export { default as PopoverPicker } from "./PopoverPicker";
+export type { PopoverPickerProps } from "./PopoverPicker";
+
+export { default as useRovingFocus } from "./useRovingFocus";
+export type { RovingFocusOptions } from "./useRovingFocus";

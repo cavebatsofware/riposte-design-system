@@ -14,6 +14,18 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
  */
 
-// Theme engine: ThemeProvider, useTheme, COLORWAYS, and types.
-// Populated in Phase 1 from the merged social/pickers ThemeContext.
-export {};
+// Theme engine. The picker UI (ThemePicker) lives in riposte-pickers, which
+// consumes this engine; design-system ships the provider, hook, and catalog.
+export {
+  ThemeProvider,
+  useTheme,
+  COLORWAYS,
+  DEFAULT_COLORWAY,
+  DEFAULT_STORAGE_KEY,
+} from "./ThemeContext";
+export type {
+  Colorway,
+  ThemeMode,
+  ThemeContextValue,
+  ThemeProviderProps,
+} from "./ThemeContext";

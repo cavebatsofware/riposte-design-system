@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 license = "GPL-3.0-only"
 authors = ["Grant DeFayette <grant@cavebatsofware.com>"]
-description = "Rust side of the Riposte design system: the canonical localized email catalogs, the branded email layout shell, and accessors for the shared CSS (palette, tokens, components)."
+description = "Rust side of the Riposte design system: the branded email layout shell, a catalog merge helper for layering per-deployment overrides over an app's email copy, and accessors for the shared CSS (palette, tokens, components). The email content itself is owned by the consuming application."
 repository = "https://github.com/cavebatsofware/riposte-design-system"
 
 # This crate references the shared stylesheets at ../../styles via include_str!,

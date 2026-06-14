@@ -16,52 +16,23 @@
 
 //! Rust side of the Riposte design system.
 //!
-//! The TypeScript package ships the frontend (tokens, theme engine, components);
-//! this crate exposes the branded assets a Rust backend also needs, from the
-//! same source of truth:
+//! Following `i18n-md-email-templates`' split, this crate owns the email
+//! *mechanism* and *brand presentation*; the *content* (the per-locale string
+//! catalogs) belongs to the consuming application, which configures and
+//! overrides it per deployment. So this crate ships:
 //!
-//! - [`email_catalog`]: the localized `email` string catalogs, embedded and
-//!   parsed once into an [`i18n_md_email_templates::Catalog`] (fallback `en`).
-//! - [`email_layout`]: the shared, inline-safe HTML email shell.
+//! - [`EMAIL_LAYOUT`] / [`email_layout`]: the shared, inline-safe HTML email
+//!   shell (brand presentation).
+//! - [`deep_merge`] and [`build_catalog`]: layer per-deployment operator
+//!   overrides over an application's default catalogs into a ready
+//!   [`i18n_md_email_templates::Catalog`].
 //! - [`stylesheet`] and the `*_CSS` constants: the same palette / token /
 //!   component CSS the npm package ships, for serving or server-side rendering.
-
-use std::sync::OnceLock;
+//!
+//! It deliberately does **not** embed any email copy.
 
 use i18n_md_email_templates::Catalog;
-
-/// Supported email locales. Keep in sync with the frontend's `SUPPORTED_LOCALES`
-/// and the backend's `crate::profile::locale::SUPPORTED_LOCALES`.
-const EMAIL_LOCALES: [(&str, &str); 5] = [
-    ("en", include_str!("../assets/email/en.json")),
-    ("es", include_str!("../assets/email/es.json")),
-    ("fr", include_str!("../assets/email/fr.json")),
-    ("zh", include_str!("../assets/email/zh.json")),
-    ("de", include_str!("../assets/email/de.json")),
-];
-
-/// Fallback locale used when a requested one is missing.
-pub const FALLBACK_LOCALE: &str = "en";
-
-/// The process-wide email string catalog, parsed once. Fallback locale is `en`.
-///
-/// Panics on first use if any embedded catalog is not valid JSON; that is a
-/// build-time content error, caught by tests and never reachable in a shipped
-/// binary.
-pub fn email_catalog() -> &'static Catalog {
-    static CATALOG: OnceLock<Catalog> = OnceLock::new();
-    CATALOG.get_or_init(|| {
-        let locales = EMAIL_LOCALES
-            .into_iter()
-            .map(|(code, raw)| {
-                let value = serde_json::from_str(raw)
-                    .unwrap_or_else(|e| panic!("invalid email catalog for {code}: {e}"));
-                (code.to_string(), value)
-            })
-            .collect();
-        Catalog::new(locales, FALLBACK_LOCALE)
-    })
-}
+use serde_json::Value;
 
 /// The Riposte-branded shared email shell: the `{{content}}` / `{{footer}}`
 /// slots and the single inline-safe `<style>` block all transactional emails
@@ -72,6 +43,44 @@ pub const EMAIL_LAYOUT: &str = include_str!("../assets/email/layout.html");
 /// Accessor for [`EMAIL_LAYOUT`].
 pub fn email_layout() -> &'static str {
     EMAIL_LAYOUT
+}
+
+/// Deep-merge `overlay` into `base`: objects merge key-by-key (recursively); any
+/// non-object overlay value, or a key absent from `base`, replaces or sets the
+/// value. So an operator override can change just `order_confirmation.body`
+/// while inheriting every other string.
+pub fn deep_merge(base: &mut Value, overlay: &Value) {
+    match (base, overlay) {
+        (Value::Object(b), Value::Object(o)) => {
+            for (k, v) in o {
+                deep_merge(b.entry(k.clone()).or_insert(Value::Null), v);
+            }
+        }
+        (b, o) => *b = o.clone(),
+    }
+}
+
+/// Build a localized email [`Catalog`] by deep-merging per-locale `overrides`
+/// over an application's `defaults`.
+///
+/// Both are `(locale_code, json)` pairs. An override for a locale is merged onto
+/// that locale's defaults (or stands alone if the locale has no defaults).
+/// `fallback` is the locale used when a requested one is missing. Pass an empty
+/// `overrides` to get the defaults unchanged.
+pub fn build_catalog(
+    defaults: impl IntoIterator<Item = (String, Value)>,
+    overrides: impl IntoIterator<Item = (String, Value)>,
+    fallback: impl Into<String>,
+) -> Catalog {
+    use std::collections::BTreeMap;
+    let mut by_locale: BTreeMap<String, Value> = defaults.into_iter().collect();
+    for (code, ov) in overrides {
+        by_locale
+            .entry(code)
+            .and_modify(|base| deep_merge(base, &ov))
+            .or_insert(ov);
+    }
+    Catalog::new(by_locale.into_iter().collect(), fallback)
 }
 
 /// Color palette: the per-colorway `[data-theme]` blocks (8 colorways, light +
@@ -95,55 +104,42 @@ pub fn stylesheet() -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serde_json::Value;
-    use std::collections::BTreeSet;
+    use serde_json::json;
 
-    /// Recursively collect dotted leaf keys from a catalog object so locales can
-    /// be compared for structural parity.
-    fn collect_keys(value: &Value, prefix: &str, out: &mut BTreeSet<String>) {
-        match value {
-            Value::Object(map) => {
-                for (k, v) in map {
-                    let path = if prefix.is_empty() {
-                        k.clone()
-                    } else {
-                        format!("{prefix}.{k}")
-                    };
-                    collect_keys(v, &path, out);
-                }
-            }
-            _ => {
-                out.insert(prefix.to_string());
-            }
-        }
-    }
-
-    fn keys_for(raw: &str) -> BTreeSet<String> {
-        let value: Value = serde_json::from_str(raw).expect("catalog is valid JSON");
-        let mut out = BTreeSet::new();
-        collect_keys(&value, "", &mut out);
-        out
+    #[test]
+    fn deep_merge_overrides_one_leaf_and_keeps_siblings() {
+        let mut base = json!({
+            "order_confirmation": { "subject": "Order received", "body": "default body" },
+            "invite": { "subject": "You are invited" }
+        });
+        let overlay = json!({ "order_confirmation": { "body": "personal note" } });
+        deep_merge(&mut base, &overlay);
+        assert_eq!(base["order_confirmation"]["body"], "personal note");
+        // Sibling key and sibling object are untouched.
+        assert_eq!(base["order_confirmation"]["subject"], "Order received");
+        assert_eq!(base["invite"]["subject"], "You are invited");
     }
 
     #[test]
-    fn every_locale_parses_and_builds() {
-        // Exercises the same path as production: parse all catalogs and build.
-        let _ = email_catalog();
+    fn build_catalog_merges_overrides_over_defaults() {
+        let defaults = [(
+            "en".to_string(),
+            json!({ "invite": { "subject": "Default subject", "body": "Default body" } }),
+        )];
+        let overrides = [(
+            "en".to_string(),
+            json!({ "invite": { "body": "Custom body" } }),
+        )];
+        let cat = build_catalog(defaults, overrides, "en");
+        assert_eq!(cat.get("en", "invite.subject").as_deref(), Some("Default subject"));
+        assert_eq!(cat.get("en", "invite.body").as_deref(), Some("Custom body"));
     }
 
     #[test]
-    fn locales_have_the_same_keys_as_en() {
-        let reference = keys_for(EMAIL_LOCALES[0].1);
-        assert_eq!(EMAIL_LOCALES[0].0, FALLBACK_LOCALE);
-        for (code, raw) in EMAIL_LOCALES.into_iter().skip(1) {
-            let keys = keys_for(raw);
-            let missing: Vec<_> = reference.difference(&keys).collect();
-            let extra: Vec<_> = keys.difference(&reference).collect();
-            assert!(
-                missing.is_empty() && extra.is_empty(),
-                "email catalog '{code}' diverges from '{FALLBACK_LOCALE}': missing={missing:?} extra={extra:?}",
-            );
-        }
+    fn build_catalog_with_no_overrides_is_defaults() {
+        let defaults = [("en".to_string(), json!({ "invite": { "subject": "Hello" } }))];
+        let cat = build_catalog(defaults, std::iter::empty(), "en");
+        assert_eq!(cat.get("en", "invite.subject").as_deref(), Some("Hello"));
     }
 
     #[test]

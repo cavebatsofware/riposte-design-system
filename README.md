@@ -1,7 +1,7 @@
 # @cavebatsofware/riposte-design-system
 
 The shared design foundation for Riposte Social and the SPAs deployed alongside
-it (the picnic-table-configurator and other per-deployment configurators). It
+it. It
 owns the canonical design tokens, the theme engine, an accessible
 popover/roving-focus chassis, and the shared, app-agnostic components.
 
@@ -58,12 +58,14 @@ Subpath exports: `.`, `./theme`, `./shared`, `./components`, `./i18n`,
 ## Rust crate
 
 The repo is polyglot: alongside the npm package, `crate/` is a Rust crate
-(`riposte-design-system`) that gives a Rust backend the same branded assets from
-one source of truth:
+(`riposte-design-system`) that gives a Rust backend the branded email *mechanism*
+and the shared CSS. Following `i18n-md-email-templates`' split, it owns the
+mechanism and brand presentation, not the email content (the per-locale string
+catalogs belong to the consuming app, which configures them per deployment):
 
-- `email_catalog()`: the localized `email` string catalogs, embedded and parsed
-  once into an `i18n_md_email_templates::Catalog`.
 - `EMAIL_LAYOUT` / `email_layout()`: the shared, inline-safe HTML email shell.
+- `deep_merge()` / `build_catalog()`: layer per-deployment operator overrides
+  over an app's default catalogs into a ready `i18n_md_email_templates::Catalog`.
 - `stylesheet()` and the `*_CSS` constants: the same palette / token / component
   CSS the npm package ships (read from `styles/` via `include_str!`), for serving
   or server-side rendering.

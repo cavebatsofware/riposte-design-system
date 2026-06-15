@@ -57,6 +57,16 @@
         "default": "./dist/components.cjs"
       }
     },
+    "./handoff": {
+      "import": {
+        "types": "./dist/handoff.d.ts",
+        "default": "./dist/handoff.js"
+      },
+      "require": {
+        "types": "./dist/handoff.d.cts",
+        "default": "./dist/handoff.cjs"
+      }
+    },
     "./i18n": {
       "import": {
         "types": "./dist/i18n/index.d.ts",

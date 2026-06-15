@@ -6,6 +6,7 @@ export default defineConfig({
     theme: "src/theme/index.ts",
     shared: "src/shared/index.ts",
     components: "src/components/index.ts",
+    handoff: "src/handoff/index.ts",
     "i18n/index": "src/i18n/index.ts",
   },
   format: ["esm", "cjs"],

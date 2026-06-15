@@ -106,5 +106,5 @@ function ThemeProvider({
 }
 
 export { COLORWAYS, DEFAULT_COLORWAY, DEFAULT_STORAGE_KEY, ThemeProvider, useTheme };
-//# sourceMappingURL=chunk-VASFIYYX.js.map
-//# sourceMappingURL=chunk-VASFIYYX.js.map
+//# sourceMappingURL=chunk-3ILB7YTH.js.map
+//# sourceMappingURL=chunk-3ILB7YTH.js.map

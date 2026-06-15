@@ -260,16 +260,241 @@ function Drawer({
     ] })
   ] });
 }
+function Button({
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  className = "",
+  type = "button",
+  ...rest
+}) {
+  const classes = [
+    "rds-btn",
+    `rds-btn-${variant}`,
+    size === "sm" && "rds-btn-sm",
+    fullWidth && "rds-btn-full",
+    className
+  ].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsx("button", { type, className: classes, ...rest });
+}
+function Badge({
+  variant = "gray",
+  small = false,
+  className = "",
+  children
+}) {
+  const classes = [
+    "rds-badge",
+    `rds-badge-${variant}`,
+    small && "rds-badge-sm",
+    className
+  ].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsx("span", { className: classes, children });
+}
+function Alert({
+  variant = "info",
+  className = "",
+  children
+}) {
+  const classes = ["rds-alert", `rds-alert-${variant}`, className].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: classes, role: variant === "error" ? "alert" : "status", children });
+}
+function FormGroup({
+  label,
+  htmlFor,
+  hint,
+  className = "",
+  children
+}) {
+  const classes = ["rds-form-group", className].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: classes, children: [
+    label != null && /* @__PURE__ */ jsxRuntime.jsx("label", { htmlFor, children: label }),
+    children,
+    hint != null && /* @__PURE__ */ jsxRuntime.jsx("small", { children: hint })
+  ] });
+}
+function ToggleSwitch({
+  checked,
+  onChange,
+  disabled = false,
+  label,
+  id,
+  className = ""
+}) {
+  const classes = ["rds-toggle", className].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsxs("label", { className: classes, children: [
+    /* @__PURE__ */ jsxRuntime.jsx(
+      "input",
+      {
+        type: "checkbox",
+        id,
+        checked,
+        disabled,
+        onChange: (e) => onChange(e.target.checked)
+      }
+    ),
+    /* @__PURE__ */ jsxRuntime.jsx("span", { className: "rds-toggle-slider", "aria-hidden": "true" }),
+    label != null && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "rds-toggle-label", children: label })
+  ] });
+}
+function StatCard({ label, value, className = "" }) {
+  const classes = ["rds-stat-card", className].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: classes, children: [
+    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-stat-label", children: label }),
+    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-stat-value", children: value })
+  ] });
+}
+var DEFAULTS = {
+  loading: "Loading\u2026",
+  empty: "No data available",
+  first: "First",
+  previous: "Previous",
+  next: "Next",
+  last: "Last",
+  pageInfo: (page, totalPages) => `Page ${page} of ${totalPages}`
+};
+function Table({
+  columns,
+  data,
+  getRowKey = (row) => row.id ?? JSON.stringify(row),
+  getRowClassName,
+  loading = false,
+  emptyMessage,
+  pagination,
+  labels
+}) {
+  const l = { ...DEFAULTS, ...labels };
+  const empty = emptyMessage ?? l.empty;
+  if (loading) {
+    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-table-loading", children: l.loading });
+  }
+  if (!data || data.length === 0) {
+    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-table-empty", children: /* @__PURE__ */ jsxRuntime.jsx("p", { children: empty }) });
+  }
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "rds-table-container", children: [
+    /* @__PURE__ */ jsxRuntime.jsxs("table", { className: "rds-data-table", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("thead", { children: /* @__PURE__ */ jsxRuntime.jsx("tr", { children: columns.map((col) => /* @__PURE__ */ jsxRuntime.jsx("th", { children: col.header }, col.key)) }) }),
+      /* @__PURE__ */ jsxRuntime.jsx("tbody", { children: data.map((row) => /* @__PURE__ */ jsxRuntime.jsx(
+        "tr",
+        {
+          className: getRowClassName ? getRowClassName(row) : void 0,
+          children: columns.map((col) => /* @__PURE__ */ jsxRuntime.jsx("td", { children: col.render ? col.render(row[col.key], row) : row[col.key] ?? null }, col.key))
+        },
+        getRowKey(row)
+      )) })
+    ] }),
+    pagination && pagination.totalPages > 1 && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "rds-pagination", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => pagination.onPageChange(1),
+          disabled: pagination.page === 1,
+          className: "rds-pagination-btn",
+          children: l.first
+        }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => pagination.onPageChange(pagination.page - 1),
+          disabled: pagination.page === 1,
+          className: "rds-pagination-btn",
+          children: l.previous
+        }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "rds-pagination-info", children: l.pageInfo(pagination.page, pagination.totalPages) }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => pagination.onPageChange(pagination.page + 1),
+          disabled: pagination.page === pagination.totalPages,
+          className: "rds-pagination-btn",
+          children: l.next
+        }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => pagination.onPageChange(pagination.totalPages),
+          disabled: pagination.page === pagination.totalPages,
+          className: "rds-pagination-btn",
+          children: l.last
+        }
+      )
+    ] })
+  ] });
+}
+function Modal({
+  open = true,
+  onClose,
+  title,
+  children,
+  footer,
+  closeLabel = "Close",
+  className = ""
+}) {
+  const ref = useFocusTrap(open, { onEscape: onClose });
+  if (!open) return null;
+  const classes = ["rds-modal", className].filter(Boolean).join(" ");
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    "div",
+    {
+      className: "rds-modal-overlay",
+      onClick: (e) => {
+        if (e.target === e.currentTarget) onClose();
+      },
+      children: /* @__PURE__ */ jsxRuntime.jsxs(
+        "div",
+        {
+          ref,
+          className: classes,
+          role: "dialog",
+          "aria-modal": "true",
+          "aria-label": typeof title === "string" ? title : void 0,
+          children: [
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "rds-modal-header", children: [
+              title != null && /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "rds-modal-title", children: title }),
+              /* @__PURE__ */ jsxRuntime.jsx(
+                "button",
+                {
+                  type: "button",
+                  className: "rds-modal-close",
+                  "aria-label": closeLabel,
+                  onClick: onClose,
+                  children: "\xD7"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-modal-body", children }),
+            footer != null && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "rds-modal-footer", children: footer })
+          ]
+        }
+      )
+    }
+  );
+}
 
+exports.Alert = Alert;
+exports.Badge = Badge;
+exports.Button = Button;
 exports.CookieBanner = CookieBanner;
 exports.Drawer = Drawer;
+exports.FormGroup = FormGroup;
 exports.LoadingBar = LoadingBar;
+exports.Modal = Modal;
 exports.SkeletonCard = SkeletonCard;
+exports.StatCard = StatCard;
+exports.Table = Table;
+exports.ToggleSwitch = ToggleSwitch;
 exports.endLoad = endLoad;
 exports.getLoadingSnapshot = getLoadingSnapshot;
 exports.resetLoadCount = resetLoadCount;
 exports.startLoad = startLoad;
 exports.subscribeLoading = subscribeLoading;
 exports.useFocusTrap_default = useFocusTrap_default;
-//# sourceMappingURL=chunk-AK75JFJP.cjs.map
-//# sourceMappingURL=chunk-AK75JFJP.cjs.map
+//# sourceMappingURL=chunk-JZVSGL3I.cjs.map
+//# sourceMappingURL=chunk-JZVSGL3I.cjs.map

@@ -112,5 +112,5 @@ exports.DEFAULT_COLORWAY = DEFAULT_COLORWAY;
 exports.DEFAULT_STORAGE_KEY = DEFAULT_STORAGE_KEY;
 exports.ThemeProvider = ThemeProvider;
 exports.useTheme = useTheme;
-//# sourceMappingURL=chunk-VSY3LWNR.cjs.map
-//# sourceMappingURL=chunk-VSY3LWNR.cjs.map
+//# sourceMappingURL=chunk-J3GQDTTR.cjs.map
+//# sourceMappingURL=chunk-J3GQDTTR.cjs.map

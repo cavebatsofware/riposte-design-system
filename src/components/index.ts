@@ -33,6 +33,37 @@ export type { DrawerProps } from "./Drawer";
 export { default as useFocusTrap } from "./useFocusTrap";
 export type { FocusTrapOptions } from "./useFocusTrap";
 
+// Admin/app UI primitives (extracted from admin-frontend). Token-styled with
+// `rds-`-prefixed classes so they never collide with a consumer's own classes.
+export { default as Button } from "./Button";
+export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
+
+export { default as Badge } from "./Badge";
+export type { BadgeProps, BadgeVariant } from "./Badge";
+
+export { default as Alert } from "./Alert";
+export type { AlertProps, AlertVariant } from "./Alert";
+
+export { default as FormGroup } from "./FormGroup";
+export type { FormGroupProps } from "./FormGroup";
+
+export { default as ToggleSwitch } from "./ToggleSwitch";
+export type { ToggleSwitchProps } from "./ToggleSwitch";
+
+export { default as StatCard } from "./StatCard";
+export type { StatCardProps } from "./StatCard";
+
+export { default as Table } from "./Table";
+export type {
+  TableProps,
+  TableColumn,
+  TablePagination,
+  TableLabels,
+} from "./Table";
+
+export { default as Modal } from "./Modal";
+export type { ModalProps } from "./Modal";
+
 // The loading bucket that <LoadingBar> renders. An app's data layer calls
 // startLoad/endLoad around requests; resetLoadCount clears it (e.g. on route
 // change).

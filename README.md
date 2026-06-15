@@ -1,8 +1,7 @@
 # @cavebatsofware/riposte-design-system
 
 The shared design foundation for Riposte Social and the SPAs deployed alongside
-it. It
-owns the canonical design tokens, the theme engine, an accessible
+it. It owns the canonical design tokens, the theme engine, an accessible
 popover/roving-focus chassis, and the shared, app-agnostic components.
 
 `@cavebatsofware/riposte-pickers` (the theme and language pickers) builds on this
@@ -59,9 +58,9 @@ Subpath exports: `.`, `./theme`, `./shared`, `./components`, `./i18n`,
 
 The repo is polyglot: alongside the npm package, `crate/` is a Rust crate
 (`riposte-design-system`) that gives a Rust backend the branded email *mechanism*
-and the shared CSS. Following `i18n-md-email-templates`' split, it owns the
-mechanism and brand presentation, not the email content (the per-locale string
-catalogs belong to the consuming app, which configures them per deployment):
+and the shared CSS. It owns the mechanism and brand presentation, not the
+email content (the per-locale string catalogs belong to the consuming app,
+which configures them per deployment):
 
 - `EMAIL_LAYOUT` / `email_layout()`: the shared, inline-safe HTML email shell.
 - `deep_merge()` / `build_catalog()`: layer per-deployment operator overrides

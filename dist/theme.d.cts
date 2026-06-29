@@ -26,15 +26,23 @@ declare const COLORWAYS: Colorway[];
 declare const DEFAULT_COLORWAY = "forest";
 declare const DEFAULT_STORAGE_KEY = "rs_theme_v1";
 declare function useTheme(): ThemeContextValue;
+/** Light/dark default. `system` (or unset) tracks the OS preference. */
+type ThemeShade = ThemeMode | "system";
 interface ThemeProviderProps {
     children: ReactNode;
     /** Colorway catalog. Defaults to the bundled riposte `COLORWAYS`. */
     colorways?: Colorway[];
     /** Colorway used when no choice is stored. Defaults to `forest`. */
     defaultColorway?: string;
+    /**
+     * Light/dark used when no choice is stored. `light`/`dark` force the shade and
+     * stop tracking the OS; `system` (default) follows the OS preference. Never
+     * persisted, so an explicit user choice always wins.
+     */
+    defaultShade?: ThemeShade;
     /** localStorage key for the persisted choice. Defaults to `rs_theme_v1`. */
     storageKey?: string;
 }
-declare function ThemeProvider({ children, colorways, defaultColorway, storageKey, }: ThemeProviderProps): react.JSX.Element;
+declare function ThemeProvider({ children, colorways, defaultColorway, defaultShade, storageKey, }: ThemeProviderProps): react.JSX.Element;
 
-export { COLORWAYS, type Colorway, DEFAULT_COLORWAY, DEFAULT_STORAGE_KEY, type ThemeContextValue, type ThemeMode, ThemeProvider, type ThemeProviderProps, useTheme };
+export { COLORWAYS, type Colorway, DEFAULT_COLORWAY, DEFAULT_STORAGE_KEY, type ThemeContextValue, type ThemeMode, ThemeProvider, type ThemeProviderProps, type ThemeShade, useTheme };

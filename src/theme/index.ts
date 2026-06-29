@@ -26,6 +26,7 @@ export {
 export type {
   Colorway,
   ThemeMode,
+  ThemeShade,
   ThemeContextValue,
   ThemeProviderProps,
 } from "./ThemeContext";

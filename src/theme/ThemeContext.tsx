@@ -101,6 +101,7 @@ function resolveInitialTheme(
   colorways: Colorway[],
   defaultColorway: string,
   storageKey: string,
+  defaultShade?: ThemeShade,
 ): string {
   let stored: string | null = null;
   try {
@@ -110,7 +111,10 @@ function resolveInitialTheme(
   }
   if (isValidThemeId(stored, colorways)) return stored;
 
-  // No explicit user choice yet: honor the OS-level preference.
+  // No explicit user choice yet. A site-configured shade forces light/dark;
+  // otherwise honor the OS-level preference.
+  if (defaultShade === "light") return defaultColorway;
+  if (defaultShade === "dark") return `${defaultColorway}-dark`;
   let prefersDark = false;
   try {
     prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -120,12 +124,21 @@ function resolveInitialTheme(
   return prefersDark ? `${defaultColorway}-dark` : defaultColorway;
 }
 
+/** Light/dark default. `system` (or unset) tracks the OS preference. */
+export type ThemeShade = ThemeMode | "system";
+
 export interface ThemeProviderProps {
   children: ReactNode;
   /** Colorway catalog. Defaults to the bundled riposte `COLORWAYS`. */
   colorways?: Colorway[];
   /** Colorway used when no choice is stored. Defaults to `forest`. */
   defaultColorway?: string;
+  /**
+   * Light/dark used when no choice is stored. `light`/`dark` force the shade and
+   * stop tracking the OS; `system` (default) follows the OS preference. Never
+   * persisted, so an explicit user choice always wins.
+   */
+  defaultShade?: ThemeShade;
   /** localStorage key for the persisted choice. Defaults to `rs_theme_v1`. */
   storageKey?: string;
 }
@@ -140,10 +153,11 @@ export function ThemeProvider({
   children,
   colorways = COLORWAYS,
   defaultColorway = DEFAULT_COLORWAY,
+  defaultShade = "system",
   storageKey = DEFAULT_STORAGE_KEY,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState(() =>
-    resolveInitialTheme(colorways, defaultColorway, storageKey),
+    resolveInitialTheme(colorways, defaultColorway, storageKey, defaultShade),
   );
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -153,6 +167,8 @@ export function ThemeProvider({
   // choice yet) tracks their system theme, and stop tracking the moment
   // they pick. Pure subscription effect; no state-from-effect on mount.
   useEffect(() => {
+    // A site-forced shade ignores the OS; only track when following system.
+    if (defaultShade === "light" || defaultShade === "dark") return undefined;
     let media: MediaQueryList;
     try {
       media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -175,7 +191,7 @@ export function ThemeProvider({
     return () => {
       media.removeEventListener?.("change", onChange);
     };
-  }, [colorways, defaultColorway, storageKey]);
+  }, [colorways, defaultColorway, defaultShade, storageKey]);
 
   function setTheme(id: string) {
     if (!isValidThemeId(id, colorways)) return;

@@ -1,5 +1,7 @@
-import { createContext, useContext, useState, useLayoutEffect, useEffect } from 'react';
-import { jsx } from 'react/jsx-runtime';
+'use strict';
+
+var react = require('react');
+var jsxRuntime = require('react/jsx-runtime');
 
 // src/theme/ThemeContext.tsx
 var COLORWAYS = [
@@ -27,9 +29,9 @@ var COLORWAYS = [
 ];
 var DEFAULT_COLORWAY = "forest";
 var DEFAULT_STORAGE_KEY = "rs_theme_v1";
-var ThemeContext = createContext(null);
+var ThemeContext = react.createContext(null);
 function useTheme() {
-  const ctx = useContext(ThemeContext);
+  const ctx = react.useContext(ThemeContext);
   if (!ctx) {
     throw new Error("useTheme must be used within ThemeProvider");
   }
@@ -40,13 +42,15 @@ function isValidThemeId(id, colorways) {
   const colorway = id.endsWith("-dark") ? id.slice(0, -"-dark".length) : id;
   return colorways.some((c) => c.id === colorway);
 }
-function resolveInitialTheme(colorways, defaultColorway, storageKey) {
+function resolveInitialTheme(colorways, defaultColorway, storageKey, defaultShade) {
   let stored = null;
   try {
     stored = localStorage.getItem(storageKey);
   } catch {
   }
   if (isValidThemeId(stored, colorways)) return stored;
+  if (defaultShade === "light") return defaultColorway;
+  if (defaultShade === "dark") return `${defaultColorway}-dark`;
   let prefersDark = false;
   try {
     prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -58,15 +62,17 @@ function ThemeProvider({
   children,
   colorways = COLORWAYS,
   defaultColorway = DEFAULT_COLORWAY,
+  defaultShade = "system",
   storageKey = DEFAULT_STORAGE_KEY
 }) {
-  const [theme, setThemeState] = useState(
-    () => resolveInitialTheme(colorways, defaultColorway, storageKey)
+  const [theme, setThemeState] = react.useState(
+    () => resolveInitialTheme(colorways, defaultColorway, storageKey, defaultShade)
   );
-  useLayoutEffect(() => {
+  react.useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-  useEffect(() => {
+  react.useEffect(() => {
+    if (defaultShade === "light" || defaultShade === "dark") return void 0;
     let media;
     try {
       media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -87,7 +93,7 @@ function ThemeProvider({
     return () => {
       media.removeEventListener?.("change", onChange);
     };
-  }, [colorways, defaultColorway, storageKey]);
+  }, [colorways, defaultColorway, defaultShade, storageKey]);
   function setTheme(id) {
     if (!isValidThemeId(id, colorways)) return;
     setThemeState(id);
@@ -102,9 +108,13 @@ function ThemeProvider({
     setTheme(nextMode === "dark" ? `${colorway}-dark` : colorway);
   }
   const mode = theme.endsWith("-dark") ? "dark" : "light";
-  return /* @__PURE__ */ jsx(ThemeContext.Provider, { value: { theme, setTheme, colorways, mode, setMode }, children });
+  return /* @__PURE__ */ jsxRuntime.jsx(ThemeContext.Provider, { value: { theme, setTheme, colorways, mode, setMode }, children });
 }
 
-export { COLORWAYS, DEFAULT_COLORWAY, DEFAULT_STORAGE_KEY, ThemeProvider, useTheme };
-//# sourceMappingURL=chunk-3ILB7YTH.js.map
-//# sourceMappingURL=chunk-3ILB7YTH.js.map
+exports.COLORWAYS = COLORWAYS;
+exports.DEFAULT_COLORWAY = DEFAULT_COLORWAY;
+exports.DEFAULT_STORAGE_KEY = DEFAULT_STORAGE_KEY;
+exports.ThemeProvider = ThemeProvider;
+exports.useTheme = useTheme;
+//# sourceMappingURL=chunk-NLTAEOG2.cjs.map
+//# sourceMappingURL=chunk-NLTAEOG2.cjs.map

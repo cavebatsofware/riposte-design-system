@@ -1,4 +1,6 @@
-import { DEFAULT_STORAGE_KEY, COLORWAYS } from './chunk-3ILB7YTH.js';
+'use strict';
+
+var chunkNLTAEOG2_cjs = require('./chunk-NLTAEOG2.cjs');
 
 // src/handoff/index.ts
 var THEME_PARAM = "rs_theme";
@@ -8,11 +10,11 @@ var DEFAULT_LOCALES = ["en", "es", "fr", "zh", "de"];
 function isValidTheme(id) {
   if (!id) return false;
   const base = id.endsWith("-dark") ? id.slice(0, -"-dark".length) : id;
-  return COLORWAYS.some((c) => c.id === base);
+  return chunkNLTAEOG2_cjs.COLORWAYS.some((c) => c.id === base);
 }
 function appendHandoffParams(href, options = {}) {
   if (typeof window === "undefined" || !href) return href;
-  const themeKey = options.themeStorageKey ?? DEFAULT_STORAGE_KEY;
+  const themeKey = options.themeStorageKey ?? chunkNLTAEOG2_cjs.DEFAULT_STORAGE_KEY;
   const localeKey = options.localeStorageKey ?? DEFAULT_LOCALE_STORAGE_KEY;
   let theme = null;
   let locale = null;
@@ -33,7 +35,7 @@ function appendHandoffParams(href, options = {}) {
 }
 function consumeHandoffParams(options = {}) {
   if (typeof window === "undefined") return;
-  const themeKey = options.themeStorageKey ?? DEFAULT_STORAGE_KEY;
+  const themeKey = options.themeStorageKey ?? chunkNLTAEOG2_cjs.DEFAULT_STORAGE_KEY;
   const localeKey = options.localeStorageKey ?? DEFAULT_LOCALE_STORAGE_KEY;
   const allowed = options.allowedLocales ?? DEFAULT_LOCALES;
   let url;
@@ -61,6 +63,11 @@ function consumeHandoffParams(options = {}) {
   }
 }
 
-export { DEFAULT_LOCALES, DEFAULT_LOCALE_STORAGE_KEY, LOCALE_PARAM, THEME_PARAM, appendHandoffParams, consumeHandoffParams };
-//# sourceMappingURL=chunk-PIC6RKGZ.js.map
-//# sourceMappingURL=chunk-PIC6RKGZ.js.map
+exports.DEFAULT_LOCALES = DEFAULT_LOCALES;
+exports.DEFAULT_LOCALE_STORAGE_KEY = DEFAULT_LOCALE_STORAGE_KEY;
+exports.LOCALE_PARAM = LOCALE_PARAM;
+exports.THEME_PARAM = THEME_PARAM;
+exports.appendHandoffParams = appendHandoffParams;
+exports.consumeHandoffParams = consumeHandoffParams;
+//# sourceMappingURL=chunk-LTEST43J.cjs.map
+//# sourceMappingURL=chunk-LTEST43J.cjs.map

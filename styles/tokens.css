@@ -4,14 +4,17 @@
  *  spacing, radius, and shadow.
  *
  *  The font stacks anchor on webfonts the consuming app loads (Inter,
- *  JetBrains Mono, Noto Sans SC, Noto Color Emoji); the generic family at each
- *  tail is the offline / CDN-blocked fallback.
+ *  JetBrains Mono, Noto Sans SC, Noto Color Emoji). The generic family sits
+ *  ahead of the coverage fonts rather than at the tail: matching runs per
+ *  glyph, so the generic still yields to Noto for CJK and emoji, while Latin
+ *  text and digits land on a real text font when the first font has not
+ *  loaded. Behind the generic, Noto Color Emoji claims digits, and every
+ *  number renders as an emoji.
  */
 
 :root {
-  --font-body: 'Inter', 'Noto Sans SC', 'Noto Color Emoji', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Noto Sans SC', 'Noto Color Emoji',
-    monospace;
+  --font-body: 'Inter', sans-serif, 'Noto Sans SC', 'Noto Color Emoji';
+  --font-mono: 'JetBrains Mono', monospace, 'Noto Sans SC', 'Noto Color Emoji';
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

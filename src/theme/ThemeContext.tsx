@@ -47,7 +47,8 @@ export interface ThemeContextValue {
 }
 
 /// Default colorways. Each one has a light and a dark variant in the bundled
-/// `styles/palette.css` under `[data-theme="<id>"]` and `[data-theme="<id>-dark"]`.
+/// `styles/palette.css` under `[data-theme="<id>"]` and `[data-theme="<id>-dark"]`,
+/// and alone in `styles/palette/<id>.css` for a consumer that ships one colorway.
 /// The picker UI splits this into two axes: colorway and mode (light/dark).
 ///
 /// The catalog mixes evocative aesthetic colorways with descriptive

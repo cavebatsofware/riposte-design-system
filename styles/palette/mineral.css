@@ -1,0 +1,72 @@
+/*  Riposte color palette: mineral.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="mineral"], [data-theme="mineral-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="mineral"] {
+  /* Sandstone: warm limestone bg, basalt text, copper primary. */
+  --color-bg: #f0ebe1;
+  --color-surface: #f8f5ed;
+  --color-surface-2: #e6dfd0;
+  --color-border: #d6cdba;
+  --color-divider: #ddd3be;
+  --color-text: #2d2925;
+  --color-muted: #6c6453;
+  --color-primary: #8e4a1f;
+  --color-primary-hover: #7a3f1a;
+  --color-on-primary: #f8f5ed;
+  --color-link-underline: #ad8d63;
+  --color-avatar-bg: #5e4b3a;
+  --color-avatar-fg: #f8f5ed;
+  --color-media-bg: #d8cdb6;
+  --color-overlay: rgba(160, 90, 44, 0.15);
+
+  --color-badge-public-bg: #d8cdb6;
+  --color-badge-public-fg: #4a3f2c;
+  --color-badge-commenters-bg: #e6d4ba;
+  --color-badge-commenters-fg: #6e5026;
+  --color-badge-posters-bg: #e8c8a8;
+  --color-badge-posters-fg: #7d3f17;
+
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+}
+
+[data-theme="mineral-dark"] {
+  /* Granite: cool charcoal bg, sandstone text, amber-copper primary,
+     faint mineral-teal hint in the badge accents. */
+  --color-bg: #1c1c1f;
+  --color-surface: #25252a;
+  --color-surface-2: #2f2f35;
+  --color-border: #3a3a42;
+  --color-divider: #333339;
+  --color-text: #ebe2cf;
+  --color-muted: #9b9281;
+  --color-primary: #d6884a;
+  --color-primary-hover: #e3995d;
+  --color-on-primary: #1c1c1f;
+  --color-link-underline: #8a6f4d;
+  --color-avatar-bg: #d6884a;
+  --color-avatar-fg: #1c1c1f;
+  --color-media-bg: #28282d;
+  --color-overlay: rgba(214, 136, 74, 0.18);
+
+  --color-badge-public-bg: #28282d;
+  --color-badge-public-fg: #d6c9a8;
+  --color-badge-commenters-bg: #2c2820;
+  --color-badge-commenters-fg: #e7c382;
+  --color-badge-posters-bg: #1f2a2c;
+  --color-badge-posters-fg: #8fc4c4;
+
+  --color-danger: #f87171;
+  --color-danger-bg: #34191a;
+  --color-danger-border: #5e2424;
+}

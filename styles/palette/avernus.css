@@ -1,0 +1,74 @@
+/*  Riposte color palette: avernus.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="avernus"], [data-theme="avernus-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="avernus"] {
+  /* Clouds: cloud-white base, midnight-blue text, sky-blue primary,
+     dawn-pink badge accents. */
+  --color-bg: #f5f7fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #e9eef7;
+  --color-border: #d8e2f0;
+  --color-divider: #e2eaf3;
+  --color-text: #1a2438;
+  --color-muted: #5e6878;
+  --color-primary: #4f6dab;
+  --color-primary-hover: #3d588f;
+  --color-on-primary: #ffffff;
+  --color-link-underline: #a3b6d2;
+  --color-avatar-bg: #4f6dab;
+  --color-avatar-fg: #ffffff;
+  --color-media-bg: #e1e9f5;
+  --color-overlay: rgba(79, 109, 171, 0.15);
+
+  --color-badge-public-bg: #d6e0f2;
+  --color-badge-public-fg: #2c3e6d;
+  --color-badge-commenters-bg: #efd9e2;
+  --color-badge-commenters-fg: #8b3e58;
+  --color-badge-posters-bg: #efe2c9;
+  --color-badge-posters-fg: #7a591b;
+
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+}
+
+[data-theme="avernus-dark"] {
+  /* Avernus: volcanic warm-black base lifted off pure black so ember
+     primary clears AA on it. Sky-rose haze for muted, lava-glow ember
+     for primary, copper underline. Tuned against BG3 Avernus reference. */
+  --color-bg: #18120f;
+  --color-surface: #221512;
+  --color-surface-2: #2f1a16;
+  --color-border: #9c563d;
+  --color-divider: #3a201a;
+  --color-text: #f3e2cf;
+  --color-muted: #b89381;
+  --color-primary: #ed5e3a;
+  --color-primary-hover: #f47049;
+  --color-on-primary: #170a06;
+  --color-link-underline: #c47a5a;
+  --color-avatar-bg: #ed5e3a;
+  --color-avatar-fg: #170a06;
+  --color-media-bg: #1f120e;
+  --color-overlay: rgba(237, 94, 58, 0.18);
+
+  --color-badge-public-bg: #2a1714;
+  --color-badge-public-fg: #f4b89c;
+  --color-badge-commenters-bg: #3a2618;
+  --color-badge-commenters-fg: #f0c98a;
+  --color-badge-posters-bg: #2e1a0e;
+  --color-badge-posters-fg: #e9a47a;
+
+  --color-danger: #f87171;
+  --color-danger-bg: #3a1717;
+  --color-danger-border: #6b2222;
+}

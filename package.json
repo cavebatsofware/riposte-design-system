@@ -80,13 +80,23 @@
     "./styles": "./styles/index.css",
     "./styles/palette.css": "./styles/palette.css",
     "./styles/tokens.css": "./styles/tokens.css",
-    "./styles/components.css": "./styles/components.css"
+    "./styles/components.css": "./styles/components.css",
+    "./styles/palette/forest.css": "./styles/palette/forest.css",
+    "./styles/palette/warm.css": "./styles/palette/warm.css",
+    "./styles/palette/plum.css": "./styles/palette/plum.css",
+    "./styles/palette/avernus.css": "./styles/palette/avernus.css",
+    "./styles/palette/mineral.css": "./styles/palette/mineral.css",
+    "./styles/palette/daltonia.css": "./styles/palette/daltonia.css",
+    "./styles/palette/tritan.css": "./styles/palette/tritan.css",
+    "./styles/palette/achroma.css": "./styles/palette/achroma.css"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "bun run palette && tsup",
+    "palette": "bun run scripts/split-palette.ts",
+    "palette:check": "bun run scripts/split-palette.ts --check",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "bun run build"
   },

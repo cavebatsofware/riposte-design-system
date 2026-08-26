@@ -1,0 +1,72 @@
+/*  Riposte color palette: forest.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="forest"], [data-theme="forest-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="forest"] {
+  /* Forest & cream: deep green primary, sand background, copper accent. */
+  --color-bg: #f5efe4;
+  --color-surface: #fbf7ee;
+  --color-surface-2: #ede4d0;
+  --color-border: #e6d8b8;
+  --color-divider: #ede1cb;
+  --color-text: #2b2a26;
+  --color-muted: #6c6453;
+  --color-primary: #2d4a37;
+  --color-primary-hover: #1f3526;
+  --color-on-primary: #fbf7ee;
+  --color-link-underline: #a89867;
+  --color-avatar-bg: #2d4a37;
+  --color-avatar-fg: #fbf7ee;
+  --color-media-bg: #e5dabd;
+  --color-overlay: rgba(45, 74, 55, 0.55);
+
+  --color-badge-public-bg: #d6e2cd;
+  --color-badge-public-fg: #2d4a37;
+  --color-badge-commenters-bg: #e8dcc1;
+  --color-badge-commenters-fg: #6b4f1c;
+  --color-badge-posters-bg: #f0d6c3;
+  --color-badge-posters-fg: #8a3d11;
+
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+}
+
+[data-theme="forest-dark"] {
+  /* Deep forest at night: near-black green base, cream foreground, the
+     same primary hue but brighter so it reads on dark surfaces. */
+  --color-bg: #14201a;
+  --color-surface: #1a2922;
+  --color-surface-2: #22372d;
+  --color-border: #2c4135;
+  --color-divider: #25372d;
+  --color-text: #f1ead8;
+  --color-muted: #a89e85;
+  --color-primary: #7ec79a;
+  --color-primary-hover: #95d6ad;
+  --color-on-primary: #14201a;
+  --color-link-underline: #6b9b80;
+  --color-avatar-bg: #7ec79a;
+  --color-avatar-fg: #14201a;
+  --color-media-bg: #1f3328;
+  --color-overlay: rgba(126, 199, 154, 0.18);
+
+  --color-badge-public-bg: #1f3328;
+  --color-badge-public-fg: #b9e3c8;
+  --color-badge-commenters-bg: #3a2f1c;
+  --color-badge-commenters-fg: #e8c889;
+  --color-badge-posters-bg: #3a2419;
+  --color-badge-posters-fg: #e9b58f;
+
+  --color-danger: #f87171;
+  --color-danger-bg: #3a1818;
+  --color-danger-border: #6b2828;
+}

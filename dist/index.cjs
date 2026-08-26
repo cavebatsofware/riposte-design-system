@@ -3,8 +3,8 @@
 require('./chunk-R63ML5J3.cjs');
 var chunk66T35TY3_cjs = require('./chunk-66T35TY3.cjs');
 var chunkJZVSGL3I_cjs = require('./chunk-JZVSGL3I.cjs');
-var chunkLTEST43J_cjs = require('./chunk-LTEST43J.cjs');
-var chunkNLTAEOG2_cjs = require('./chunk-NLTAEOG2.cjs');
+var chunkFZG3FUMZ_cjs = require('./chunk-FZG3FUMZ.cjs');
+var chunkQEOZBZWT_cjs = require('./chunk-QEOZBZWT.cjs');
 
 
 
@@ -90,47 +90,47 @@ Object.defineProperty(exports, "useFocusTrap", {
 });
 Object.defineProperty(exports, "DEFAULT_LOCALES", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.DEFAULT_LOCALES; }
+  get: function () { return chunkFZG3FUMZ_cjs.DEFAULT_LOCALES; }
 });
 Object.defineProperty(exports, "DEFAULT_LOCALE_STORAGE_KEY", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.DEFAULT_LOCALE_STORAGE_KEY; }
+  get: function () { return chunkFZG3FUMZ_cjs.DEFAULT_LOCALE_STORAGE_KEY; }
 });
 Object.defineProperty(exports, "LOCALE_PARAM", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.LOCALE_PARAM; }
+  get: function () { return chunkFZG3FUMZ_cjs.LOCALE_PARAM; }
 });
 Object.defineProperty(exports, "THEME_PARAM", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.THEME_PARAM; }
+  get: function () { return chunkFZG3FUMZ_cjs.THEME_PARAM; }
 });
 Object.defineProperty(exports, "appendHandoffParams", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.appendHandoffParams; }
+  get: function () { return chunkFZG3FUMZ_cjs.appendHandoffParams; }
 });
 Object.defineProperty(exports, "consumeHandoffParams", {
   enumerable: true,
-  get: function () { return chunkLTEST43J_cjs.consumeHandoffParams; }
+  get: function () { return chunkFZG3FUMZ_cjs.consumeHandoffParams; }
 });
 Object.defineProperty(exports, "COLORWAYS", {
   enumerable: true,
-  get: function () { return chunkNLTAEOG2_cjs.COLORWAYS; }
+  get: function () { return chunkQEOZBZWT_cjs.COLORWAYS; }
 });
 Object.defineProperty(exports, "DEFAULT_COLORWAY", {
   enumerable: true,
-  get: function () { return chunkNLTAEOG2_cjs.DEFAULT_COLORWAY; }
+  get: function () { return chunkQEOZBZWT_cjs.DEFAULT_COLORWAY; }
 });
 Object.defineProperty(exports, "DEFAULT_STORAGE_KEY", {
   enumerable: true,
-  get: function () { return chunkNLTAEOG2_cjs.DEFAULT_STORAGE_KEY; }
+  get: function () { return chunkQEOZBZWT_cjs.DEFAULT_STORAGE_KEY; }
 });
 Object.defineProperty(exports, "ThemeProvider", {
   enumerable: true,
-  get: function () { return chunkNLTAEOG2_cjs.ThemeProvider; }
+  get: function () { return chunkQEOZBZWT_cjs.ThemeProvider; }
 });
 Object.defineProperty(exports, "useTheme", {
   enumerable: true,
-  get: function () { return chunkNLTAEOG2_cjs.useTheme; }
+  get: function () { return chunkQEOZBZWT_cjs.useTheme; }
 });
 //# sourceMappingURL=index.cjs.map
 //# sourceMappingURL=index.cjs.map

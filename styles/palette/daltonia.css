@@ -1,0 +1,80 @@
+/*  Riposte color palette: daltonia.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="daltonia"], [data-theme="daltonia-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="daltonia"] {
+  /* Red-green accessible (light): designed FOR users with R-G CVD,
+     not just compatible with them. Their working S cones perceive
+     the blue-yellow axis richly, so the palette lives there: warm
+     parchment bg, prussian blue primary, golden amber accents.
+     Aesthetic reference: vintage cartography, golden-hour lighting,
+     blue-and-gold heraldry. R-G axis is unused. */
+  --color-bg: #f5ecd5;
+  --color-surface: #fbf6e6;
+  --color-surface-2: #e8dbb8;
+  --color-border: #c9b890;
+  --color-divider: #d8c9a0;
+  --color-text: #0e1a30;
+  --color-muted: #4d5670;
+  --color-primary: #1c4a8c;
+  --color-primary-hover: #144078;
+  --color-on-primary: #fbf6e6;
+  --color-link-underline: #a06f1a;
+  --color-avatar-bg: #1c4a8c;
+  --color-avatar-fg: #fbf6e6;
+  --color-media-bg: #ebe1c5;
+  --color-overlay: rgba(28, 74, 140, 0.55);
+
+  --color-badge-public-bg: #d4dde8;
+  --color-badge-public-fg: #142a52;
+  --color-badge-commenters-bg: #f0deb0;
+  --color-badge-commenters-fg: #6e4c10;
+  --color-badge-posters-bg: #ead8a8;
+  --color-badge-posters-fg: #2a3d6c;
+
+  --color-danger: #8e3c00;
+  --color-danger-bg: #fde6c8;
+  --color-danger-border: #e8c790;
+}
+
+[data-theme="daltonia-dark"] {
+  /* Red-green accessible (dark): deep midnight blue with golden
+     lamplight. Bright amber primary glows on a near-black blue base;
+     warm cream text. The "blue night, gold lamp" identity reads
+     vivid to deuteranopes/protanopes via the blue-yellow axis their
+     working S cones still resolve at full saturation. */
+  --color-bg: #0a1428;
+  --color-surface: #142440;
+  --color-surface-2: #1d2f50;
+  --color-border: #3a4d70;
+  --color-divider: #1f2a44;
+  --color-text: #f0e8d0;
+  --color-muted: #a89a7a;
+  --color-primary: #e8b03a;
+  --color-primary-hover: #f0c45a;
+  --color-on-primary: #0a1428;
+  --color-link-underline: #c4942a;
+  --color-avatar-bg: #e8b03a;
+  --color-avatar-fg: #0a1428;
+  --color-media-bg: #142440;
+  --color-overlay: rgba(232, 176, 58, 0.18);
+
+  --color-badge-public-bg: #1d2f50;
+  --color-badge-public-fg: #e8c870;
+  --color-badge-commenters-bg: #3a2e14;
+  --color-badge-commenters-fg: #f0c870;
+  --color-badge-posters-bg: #1a3050;
+  --color-badge-posters-fg: #d8e0f0;
+
+  --color-danger: #ff9a4a;
+  --color-danger-bg: #2e1808;
+  --color-danger-border: #6e3520;
+}

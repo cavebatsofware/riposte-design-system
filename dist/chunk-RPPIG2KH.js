@@ -1,4 +1,4 @@
-import { DEFAULT_STORAGE_KEY, COLORWAYS } from './chunk-5BMLKUPG.js';
+import { DEFAULT_STORAGE_KEY, COLORWAYS } from './chunk-FZAAMM6N.js';
 
 // src/handoff/index.ts
 var THEME_PARAM = "rs_theme";
@@ -62,5 +62,5 @@ function consumeHandoffParams(options = {}) {
 }
 
 export { DEFAULT_LOCALES, DEFAULT_LOCALE_STORAGE_KEY, LOCALE_PARAM, THEME_PARAM, appendHandoffParams, consumeHandoffParams };
-//# sourceMappingURL=chunk-3I2UMJZ6.js.map
-//# sourceMappingURL=chunk-3I2UMJZ6.js.map
+//# sourceMappingURL=chunk-RPPIG2KH.js.map
+//# sourceMappingURL=chunk-RPPIG2KH.js.map

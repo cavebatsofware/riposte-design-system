@@ -1,0 +1,89 @@
+/*  Riposte color palette: tritan.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="tritan"], [data-theme="tritan-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="tritan"] {
+  /* Blue-yellow accessible (light): forest-floor aesthetic of moss,
+     berry, and bark. Tritans have working L+M cones so they perceive
+     the red-green axis richly; they LACK S cones so warm yellows
+     shift toward pink in their perception. Earlier draft used warm
+     cream + amber + coral accents which all collapsed into a single
+     "warm pink" zone for the target user, killing perceptual
+     variety. This palette pivots to neutral warm-stone bg + deep
+     forest primary + red/green/bark badges so the user gets four
+     distinct perceptual zones (green, red, brown, neutral) rather
+     than one warm zone repeated. Bg uses R = G to avoid any residual
+     pink shift under tritanopia: with no S channel to balance, even
+     a slight R-over-G bias collapses into a warm-pink wash. Sits as
+     a defensible neutral pending validation with actual tritan
+     users; cooler-sage and warmer-paper alternatives are equally
+     plausible aesthetic directions but require user feedback to
+     pick between. */
+  --color-bg: #e6e8df;
+  --color-surface: #f0f2e8;
+  --color-surface-2: #d6d9ce;
+  --color-border: #c0c4ae;
+  --color-divider: #ccd0be;
+  --color-text: #1a2818;
+  --color-muted: #525c44;
+  --color-primary: #2c5538;
+  --color-primary-hover: #234628;
+  --color-on-primary: #f0f2e8;
+  --color-link-underline: #8a2818;
+  --color-avatar-bg: #2c5538;
+  --color-avatar-fg: #f0f2e8;
+  --color-media-bg: #d6d9ce;
+  --color-overlay: rgba(44, 85, 56, 0.55);
+
+  --color-badge-public-bg: #d0e0c8;
+  --color-badge-public-fg: #1f3a26;
+  --color-badge-commenters-bg: #f0d2d2;
+  --color-badge-commenters-fg: #6e1818;
+  --color-badge-posters-bg: #d8d8c8;
+  --color-badge-posters-fg: #4a3520;
+
+  --color-danger: #8e1818;
+  --color-danger-bg: #fde0e0;
+  --color-danger-border: #e8b5b5;
+}
+
+[data-theme="tritan-dark"] {
+  /* Blue-yellow accessible (dark): deep forest at night with autumn
+     fire. Coral-red primary glows on a near-black green base; warm
+     cream text. Reads vivid to tritans via the red-green axis their
+     working L+M cones still resolve at full saturation. */
+  --color-bg: #0d1a12;
+  --color-surface: #152a1c;
+  --color-surface-2: #1f3e28;
+  --color-border: #3a5240;
+  --color-divider: #234028;
+  --color-text: #f0e8d0;
+  --color-muted: #8c9c70;
+  --color-primary: #dd7866;
+  --color-primary-hover: #e88876;
+  --color-on-primary: #0d1a12;
+  --color-link-underline: #d68c7a;
+  --color-avatar-bg: #dd7866;
+  --color-avatar-fg: #0d1a12;
+  --color-media-bg: #152a1c;
+  --color-overlay: rgba(221, 120, 102, 0.18);
+
+  --color-badge-public-bg: #2a4a30;
+  --color-badge-public-fg: #c8e0c0;
+  --color-badge-commenters-bg: #4a1e1e;
+  --color-badge-commenters-fg: #f0c0a0;
+  --color-badge-posters-bg: #3a2a14;
+  --color-badge-posters-fg: #e8c79a;
+
+  --color-danger: #ff6655;
+  --color-danger-bg: #3d1818;
+  --color-danger-border: #6a2a2a;
+}

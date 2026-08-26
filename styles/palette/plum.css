@@ -1,0 +1,72 @@
+/*  Riposte color palette: plum.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="plum"], [data-theme="plum-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="plum"] {
+  /* Plum & apricot: aubergine primary, cream surface, peach accents. */
+  --color-bg: #fbf6f0;
+  --color-surface: #ffffff;
+  --color-surface-2: #f5e9dc;
+  --color-border: #f0e2d0;
+  --color-divider: #f0e2d0;
+  --color-text: #2a1a2e;
+  --color-muted: #7a6c75;
+  --color-primary: #5b1f4d;
+  --color-primary-hover: #44153a;
+  --color-on-primary: #fbf6f0;
+  --color-link-underline: #c89070;
+  --color-avatar-bg: #5b1f4d;
+  --color-avatar-fg: #fbf6f0;
+  --color-media-bg: #f3e3d2;
+  --color-overlay: rgba(91, 31, 77, 0.55);
+
+  --color-badge-public-bg: #fbe2cf;
+  --color-badge-public-fg: #9c3f0a;
+  --color-badge-commenters-bg: #ead4e2;
+  --color-badge-commenters-fg: #5b1f4d;
+  --color-badge-posters-bg: #fae8b8;
+  --color-badge-posters-fg: #7a5106;
+
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+}
+
+[data-theme="plum-dark"] {
+  /* Plum & apricot after dark: deep aubergine base, peach text, primary
+     stays plum but pushed lighter for contrast. */
+  --color-bg: #1c1220;
+  --color-surface: #271a2c;
+  --color-surface-2: #34253a;
+  --color-border: #3f2d46;
+  --color-divider: #382740;
+  --color-text: #f3e1d3;
+  --color-muted: #ad9a9f;
+  --color-primary: #c884b6;
+  --color-primary-hover: #d99dc7;
+  --color-on-primary: #1c1220;
+  --color-link-underline: #b3829e;
+  --color-avatar-bg: #c884b6;
+  --color-avatar-fg: #1c1220;
+  --color-media-bg: #2c1f33;
+  --color-overlay: rgba(200, 132, 182, 0.18);
+
+  --color-badge-public-bg: #3a221d;
+  --color-badge-public-fg: #f0c6a8;
+  --color-badge-commenters-bg: #2e1f33;
+  --color-badge-commenters-fg: #e3b9d6;
+  --color-badge-posters-bg: #3a2e16;
+  --color-badge-posters-fg: #e6cf8b;
+
+  --color-danger: #f87171;
+  --color-danger-bg: #3a1717;
+  --color-danger-border: #5e2222;
+}

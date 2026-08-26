@@ -16,7 +16,10 @@ package; so does `social-frontend`. `admin-frontend` normalizes on it over time.
 - **Design tokens** (`./styles`): eight colorways, each with a light and dark
   variant, including three WCAG 2.1 accessibility colorways (`daltonia`,
   `tritan`, `achroma`). Color tokens in `palette.css`, the shared
-  typography/spacing/radius/shadow scale in `tokens.css`.
+  typography/spacing/radius/shadow scale in `tokens.css`. A size-constrained
+  consumer can take one colorway instead of all sixteen blocks:
+  `palette/<colorway>.css` carries that colorway's light and dark blocks and
+  nothing else.
 - **Theme engine** (`./theme`): `ThemeProvider` / `useTheme`, a
   localStorage-backed colorway + light/dark store that tracks the OS preference
   until the user makes an explicit choice. The colorway catalog is injectable,
@@ -52,7 +55,14 @@ export function App({ children }) {
 
 Subpath exports: `.`, `./theme`, `./shared`, `./components`, `./i18n`,
 `./styles` (and `./styles/palette.css`, `./styles/tokens.css`,
-`./styles/components.css` individually).
+`./styles/components.css` individually, plus
+`./styles/palette/<colorway>.css` for a single colorway):
+
+```ts
+// One colorway, about 2.3 KB instead of the 19 KB catalog. The document sets
+// data-theme itself; these files carry no `:root` default.
+import "@cavebatsofware/riposte-design-system/styles/palette/forest.css";
+```
 
 ## Rust crate
 
@@ -84,9 +94,14 @@ cargo test   # builds the crate and checks locale parity + asset wiring
 
 ```sh
 bun install
-bun run build       # tsup: ESM + CJS + .d.ts for every entry
-bun run typecheck   # tsc --noEmit
+bun run build         # splits the palette, then tsup: ESM + CJS + .d.ts
+bun run typecheck     # tsc --noEmit
+bun run palette:check # per-colorway files still match styles/palette.css
 ```
+
+`styles/palette/*.css` is generated from `styles/palette.css` by
+`scripts/split-palette.ts`, which `bun run build` runs first. Edit the
+concatenated file; the parts follow.
 
 ## License
 

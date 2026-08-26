@@ -23,6 +23,8 @@ One repo, two artifacts:
 bun install
 bun run build       # tsup → dist/ (ESM + CJS + .d.ts)
 bun run typecheck   # tsc --noEmit
+bun run palette:check # styles/palette/*.css agree with styles/palette.css;
+                      # the build regenerates them first either way
 cd crate && cargo test
 ```
 
@@ -41,7 +43,11 @@ cd crate && cargo test
 - `src/i18n/`: resource bundles a consumer merges into its own i18next instance.
 - `styles/`: `palette.css` (8 colorways x light/dark, including 3 WCAG
   accessibility colorways), `tokens.css`, `components.css`. The single source of
-  truth for design tokens.
+  truth for design tokens. `styles/palette/<colorway>.css` is generated from
+  `palette.css` by `scripts/split-palette.ts` for consumers on a size budget:
+  edit the concatenated file, never a part. A new colorway needs a
+  `./styles/palette/<id>.css` entry in `package.json` exports, which the script
+  fails without.
 - `crate/`: Rust side; default email copy lives in the consuming app, not here.
 
 ## Conventions

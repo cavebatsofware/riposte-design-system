@@ -1,0 +1,80 @@
+/*  Riposte color palette: achroma.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="achroma"], [data-theme="achroma-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="achroma"] {
+  /* High contrast (light): pure black-on-white core for monovision
+     and low-vision users. Borders are load-bearing here (full black)
+     rather than the soft decorative aesthetic of the other themes.
+     Deep blue primary keeps a single saturated accent that also
+     reads as a distinct dark luminance under monochromacy. Badges
+     differ in luminance step rather than hue so they remain
+     distinguishable when all hue is collapsed. */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f0;
+  --color-border: #000000;
+  --color-divider: #cccccc;
+  --color-text: #000000;
+  --color-muted: #404040;
+  --color-primary: #0000aa;
+  --color-primary-hover: #000077;
+  --color-on-primary: #ffffff;
+  --color-link-underline: #000000;
+  --color-avatar-bg: #000000;
+  --color-avatar-fg: #ffffff;
+  --color-media-bg: #f0f0f0;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  --color-badge-public-bg: #000000;
+  --color-badge-public-fg: #ffffff;
+  --color-badge-commenters-bg: #404040;
+  --color-badge-commenters-fg: #ffffff;
+  --color-badge-posters-bg: #666666;
+  --color-badge-posters-fg: #ffffff;
+
+  --color-danger: #cc0000;
+  --color-danger-bg: #ffe6e6;
+  --color-danger-border: #cc0000;
+}
+
+[data-theme="achroma-dark"] {
+  /* High contrast (dark): pure white-on-black inverse. Sky-blue
+     primary lifted for dark mode. Badges step through three light
+     luminances (white, light grey, mid grey) so monochromat vision
+     can still rank them. */
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #1a1a1a;
+  --color-border: #ffffff;
+  --color-divider: #404040;
+  --color-text: #ffffff;
+  --color-muted: #cccccc;
+  --color-primary: #66aaff;
+  --color-primary-hover: #99c4ff;
+  --color-on-primary: #000000;
+  --color-link-underline: #ffffff;
+  --color-avatar-bg: #ffffff;
+  --color-avatar-fg: #000000;
+  --color-media-bg: #1a1a1a;
+  --color-overlay: rgba(255, 255, 255, 0.3);
+
+  --color-badge-public-bg: #ffffff;
+  --color-badge-public-fg: #000000;
+  --color-badge-commenters-bg: #cccccc;
+  --color-badge-commenters-fg: #000000;
+  --color-badge-posters-bg: #999999;
+  --color-badge-posters-fg: #000000;
+
+  --color-danger: #ff6666;
+  --color-danger-bg: #4d0000;
+  --color-danger-border: #ff6666;
+}

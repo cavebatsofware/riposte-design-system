@@ -1,0 +1,72 @@
+/*  Riposte color palette: warm.
+ *
+ *  One colorway, for a consumer that ships a single one rather than the whole
+ *  catalog: [data-theme="warm"], [data-theme="warm-dark"].
+ *
+ *  No `:root` companion, unlike the concatenated palette.css: the document
+ *  sets [data-theme] itself, so importing two of these never leaves the
+ *  default to load order. The non-color scale is still in tokens.css.
+ *
+ *  Generated from styles/palette.css by scripts/split-palette.ts.
+ */
+
+[data-theme="warm"] {
+  /* Warm editorial: deep navy primary, ivory base, terracotta accent. */
+  --color-bg: #f7f1e8;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0e8da;
+  --color-border: #ebe0c9;
+  --color-divider: #ede1cb;
+  --color-text: #1f2937;
+  --color-muted: #6e6452;
+  --color-primary: #1d3557;
+  --color-primary-hover: #14253f;
+  --color-on-primary: #ffffff;
+  --color-link-underline: #b8a578;
+  --color-avatar-bg: #1d3557;
+  --color-avatar-fg: #ffffff;
+  --color-media-bg: #ede1cb;
+  --color-overlay: rgba(29, 53, 87, 0.55);
+
+  --color-badge-public-bg: #e6dccb;
+  --color-badge-public-fg: #1d3557;
+  --color-badge-commenters-bg: #ddd2bd;
+  --color-badge-commenters-fg: #4b3a1f;
+  --color-badge-posters-bg: rgba(194, 65, 12, 0.12);
+  --color-badge-posters-fg: #9a3412;
+
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+}
+
+[data-theme="warm-dark"] {
+  /* Warm editorial after dark: deep ink-navy base, ivory text, the navy
+     primary lifted toward a powdered blue. */
+  --color-bg: #131826;
+  --color-surface: #1a2236;
+  --color-surface-2: #232c44;
+  --color-border: #2e3a55;
+  --color-divider: #2a3349;
+  --color-text: #ece4d4;
+  --color-muted: #a59c87;
+  --color-primary: #8ab2dd;
+  --color-primary-hover: #a3c2e6;
+  --color-on-primary: #131826;
+  --color-link-underline: #7a8db3;
+  --color-avatar-bg: #8ab2dd;
+  --color-avatar-fg: #131826;
+  --color-media-bg: #1f293f;
+  --color-overlay: rgba(138, 178, 221, 0.18);
+
+  --color-badge-public-bg: #1f293f;
+  --color-badge-public-fg: #b9d2f0;
+  --color-badge-commenters-bg: #38301c;
+  --color-badge-commenters-fg: #e7c785;
+  --color-badge-posters-bg: #3a241a;
+  --color-badge-posters-fg: #ecb38e;
+
+  --color-danger: #f87171;
+  --color-danger-bg: #341919;
+  --color-danger-border: #5e2727;
+}

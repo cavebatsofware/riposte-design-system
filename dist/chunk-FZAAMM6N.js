@@ -1,7 +1,5 @@
-'use strict';
-
-var react = require('react');
-var jsxRuntime = require('react/jsx-runtime');
+import { createContext, useContext, useState, useLayoutEffect, useEffect } from 'react';
+import { jsx } from 'react/jsx-runtime';
 
 // src/theme/ThemeContext.tsx
 var COLORWAYS = [
@@ -29,9 +27,9 @@ var COLORWAYS = [
 ];
 var DEFAULT_COLORWAY = "forest";
 var DEFAULT_STORAGE_KEY = "rs_theme_v1";
-var ThemeContext = react.createContext(null);
+var ThemeContext = createContext(null);
 function useTheme() {
-  const ctx = react.useContext(ThemeContext);
+  const ctx = useContext(ThemeContext);
   if (!ctx) {
     throw new Error("useTheme must be used within ThemeProvider");
   }
@@ -65,13 +63,13 @@ function ThemeProvider({
   defaultShade = "system",
   storageKey = DEFAULT_STORAGE_KEY
 }) {
-  const [theme, setThemeState] = react.useState(
+  const [theme, setThemeState] = useState(
     () => resolveInitialTheme(colorways, defaultColorway, storageKey, defaultShade)
   );
-  react.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-  react.useEffect(() => {
+  useEffect(() => {
     if (defaultShade === "light" || defaultShade === "dark") return void 0;
     let media;
     try {
@@ -108,13 +106,9 @@ function ThemeProvider({
     setTheme(nextMode === "dark" ? `${colorway}-dark` : colorway);
   }
   const mode = theme.endsWith("-dark") ? "dark" : "light";
-  return /* @__PURE__ */ jsxRuntime.jsx(ThemeContext.Provider, { value: { theme, setTheme, colorways, mode, setMode }, children });
+  return /* @__PURE__ */ jsx(ThemeContext.Provider, { value: { theme, setTheme, colorways, mode, setMode }, children });
 }
 
-exports.COLORWAYS = COLORWAYS;
-exports.DEFAULT_COLORWAY = DEFAULT_COLORWAY;
-exports.DEFAULT_STORAGE_KEY = DEFAULT_STORAGE_KEY;
-exports.ThemeProvider = ThemeProvider;
-exports.useTheme = useTheme;
-//# sourceMappingURL=chunk-NLTAEOG2.cjs.map
-//# sourceMappingURL=chunk-NLTAEOG2.cjs.map
+export { COLORWAYS, DEFAULT_COLORWAY, DEFAULT_STORAGE_KEY, ThemeProvider, useTheme };
+//# sourceMappingURL=chunk-FZAAMM6N.js.map
+//# sourceMappingURL=chunk-FZAAMM6N.js.map

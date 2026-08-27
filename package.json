@@ -1,6 +1,6 @@
 {
   "name": "@cavebatsofware/riposte-design-system",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Riposte design system: design tokens (8 themes incl. 3 WCAG accessibility colorways), a localStorage-backed theme engine, an accessible popover/roving-focus chassis, and shared components. The foundation riposte-pickers and the Riposte SPAs build on.",
   "license": "GPL-3.0-only",
   "author": "Grant DeFayette <grant@cavebatsofware.com>",
